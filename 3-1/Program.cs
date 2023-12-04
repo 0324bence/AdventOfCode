@@ -50,11 +50,10 @@ namespace _3_1
             }
             int startPos = pos;
             int endPos = pos;
-            while (startPos >= 0 && char.IsDigit(input[startPos])) {
+            while (startPos - 1 >= 0 && char.IsDigit(input[startPos - 1])) {
                 startPos--;
             }
-            startPos++;
-            while (endPos < input.Length && char.IsDigit(input[endPos])) {
+            while (endPos + 1 < input.Length - 1 && char.IsDigit(input[endPos + 1])) {
                 endPos++;
             }
             return new int[] { startPos, endPos };
