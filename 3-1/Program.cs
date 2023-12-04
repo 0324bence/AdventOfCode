@@ -53,7 +53,7 @@ namespace _3_1
             while (startPos - 1 >= 0 && char.IsDigit(input[startPos - 1])) {
                 startPos--;
             }
-            while (endPos + 1 < input.Length - 1 && char.IsDigit(input[endPos + 1])) {
+            while (endPos + 1 <= input.Length - 1 && char.IsDigit(input[endPos + 1])) {
                 endPos++;
             }
             return new int[] { startPos, endPos };
