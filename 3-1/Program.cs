@@ -26,11 +26,11 @@ namespace _3_1
                             int[] numPos = GetWholeNumberPos(input[number[0]], number[1]);
                             string positon = $"{number[0]}{numPos[0]}";
 
-                            int debugvar = int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0]));
+                            int debugvar = int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0] + 1));
                             //Check if numbers was already read
                             if (!done.Contains(positon)) {
                                 //Get the number by substringing
-                                output += int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0]));
+                                output += int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0] + 1));
                             }
 
                             //Save start point of already read numbers
@@ -53,7 +53,7 @@ namespace _3_1
             while (startPos - 1 >= 0 && char.IsDigit(input[startPos - 1])) {
                 startPos--;
             }
-            while (endPos + 1 <= input.Length - 1 && char.IsDigit(input[endPos + 1])) {
+            while (endPos + 1 < input.Length && char.IsDigit(input[endPos + 1])) {
                 endPos++;
             }
             return new int[] { startPos, endPos };
