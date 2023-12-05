@@ -24,13 +24,13 @@ namespace _3_1
                         foreach (int[] number in numbers) {
                             //Console.WriteLine($"Number in line {number[0]} at pos {number[1]} is {input[number[0]][number[1]]}");
                             int[] numPos = GetWholeNumberPos(input[number[0]], number[1]);
-                            string positon = $"{number[0]}{numPos[0]}";
+                            string positon = $"{number[0]}-{numPos[0]}";
 
-                            int debugvar = int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0]));
+                            string debugvar = input[number[0]].Substring(numPos[0], numPos[1] - numPos[0] +1);
                             //Check if numbers was already read
                             if (!done.Contains(positon)) {
                                 //Get the number by substringing
-                                output += int.Parse(input[number[0]].Substring(numPos[0], numPos[1] - numPos[0]));
+                                output += int.Parse(debugvar);
                             }
 
                             //Save start point of already read numbers
@@ -50,11 +50,10 @@ namespace _3_1
             }
             int startPos = pos;
             int endPos = pos;
-            while (startPos >= 0 && char.IsDigit(input[startPos])) {
+            while (startPos - 1 >= 0 && char.IsDigit(input[startPos -1])) {
                 startPos--;
             }
-            startPos++;
-            while (endPos < input.Length && char.IsDigit(input[endPos])) {
+            while (endPos + 1 < input.Length && char.IsDigit(input[endPos + 1])) {
                 endPos++;
             }
             return new int[] { startPos, endPos };
@@ -68,16 +67,15 @@ namespace _3_1
                 bool oneNum = false;
                 for (int j = pos-1; j <= pos+1; j++) {
                     try {
-                        if (!char.IsDigit(input[i][j]) || oneNum) {
-                            oneNum = false;
+                        if (char.IsDigit(input[i][j]) && !oneNum) {
+                            oneNum = true;
+                            outputs.Add(new int[] { i,j });
                             continue;
                         }
-                        char debug = input[i][j];
-                        if (char.IsDigit(input[i][j])) {
-                            outputs.Add(new int[] { i, j });
-                            oneNum = true;
-
+                        if (oneNum && char.IsDigit(input[i][j])) {
+                            continue;
                         }
+                        oneNum= false;
                     } catch {
                         Console.WriteLine("Failed");
                     }
